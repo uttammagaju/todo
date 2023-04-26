@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/authenticate/google_sign_in.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,7 +38,13 @@ class HomePage extends StatelessWidget {
                   'sign Out',
                   style: TextStyle(fontSize: 24),
                 ),
-                onPressed: () => FirebaseAuth.instance.signOut()),
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.logout();
+                }
+                //=> FirebaseAuth.instance.signOut()
+                ),
           ],
         ),
       ),
